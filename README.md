@@ -10,9 +10,9 @@
 
 [Deployed](https://web.nih.world)
 /
-[Frontend repository](https://github.com/NeedleInHaystack-client)
+[Frontend repository](https://github.com/Team-Office360/NeedleInHaystack-client)
 /
-[Backend repository](https://github.com/NeedleInHaystack-server)
+[Backend repository](https://github.com/Team-Office360/NeedleInHaystack-server)
 
 </div>
 
@@ -132,6 +132,11 @@ const keywordSchema = new mongoose.Schema({
 
 이를 해결하기 위해 크롤링과 동시에 해당 비디오의 점수를 구하고 비디오들이 담긴 배열을 내림차순을 정렬하여 저장하였습니다. 미리 DB에 점수가 구해지고 정렬되어 있기 때문에 사용자가 키워드를 검색했을 시 빠른 속도로 결과를 보여줄 수 있게 되었습니다.
 
+<p>
+  <img height="200px" alt="search-before" src="https://github.com/Team-Office360/NeedleInHaystack-client/assets/133403759/06950a9a-9110-4112-a311-7509d8139cfe">
+  <img height="200px" alt="search-after" src="https://github.com/Team-Office360/NeedleInHaystack-client/assets/133403759/86b4d14c-2fb3-4139-a801-8af91125f6a7">
+</p>
+
 #### 크롤러 자동화 (automated crawler)
 
 저희는 총 3가지 단계를 거치면서 크롤러를 수정했습니다.
@@ -163,10 +168,18 @@ TF는 한 콘텐츠에서 해당 단어가 등장한 횟수를 모든 단어가 
 
 IDF는 총 콘텐츠의 개수를 해당 단어가 등장하는 콘텐츠의 수로 나눈 값입니다. 해당 단어가 등장하는 콘텐츠의 수가 많아질수록 반비례하여 작아집니다. 즉 단어의 unique함, 고유값을 나타냅니다.
 
+<p>
+  <img width="500" alt="tf-idf" src="https://github.com/Team-Office360/NeedleInHaystack-client/assets/133403759/b58c2908-5484-47c4-a8df-d3127d533c1a">
+</p>
+
 TF-IDF는 단순히 이 두 값을 곱한 값으로 콘텐츠에 해당 단어가 많이 등장하고, 다른 콘텐츠에는 등장하지 않을 수록 그 값이 높아집니다.
 
 저희는 TF-IDF를 조금 변형한 알고리즘인 BM 25알고리즘으로 변경하였습니다.
 BM25알고리즘에는 상수 k1, b가 추가됩니다. 두 상수값은 빈도수의 최댓값, 문서길이의 최소값을 보장해주는 역할을 합니다.
+
+<p>
+  <img width="500" alt="bm25" src="https://github.com/Team-Office360/NeedleInHaystack-client/assets/133403759/79dcd620-e2a0-4db8-8622-c825caf5aa38">
+</p>
 
 BM25 알고리즘은 또한 문서의 길이와 전체 문서의 평균길이를 계산에 포함하여 문서 길이에 대한 정규화까지 진행하게 됩니다.
 현재는 콘텐츠의 각 필드별로 값을 계산하는 방식인 BM25F알고리즘을 적용하여, 비디오에 있는 다양한 필드인 title, description, script, tag에 부여된 상대적인 중요도에 따라 무게치를 다르게 주었습니다.
@@ -217,15 +230,6 @@ soundex알고리즘은 단어의 발음을 비고하여 유사도를 분석합�
 
 이에 생각해낸 방법은 크롤러를 사용할 때 처럼 Puppeteer를 사용해 실제 유튜브 웹 페이지에서 headless browser로 접근하여 스크린샷을 찍어 오는 것 이었습니다.
 유튜브 웹 페이지에서 영상은 Iframe이 아닌 Video 태그로 이루어져있기 때문에 DOM에 접근이 가능 하였고, 이를 활용해 유저가 보는 비디오의 비디오id, 현재 영상 재생 시점 두가지 정보를 토대로 유저가 보고있는 영상 시점의 화면을 스크린샷으로 찍어올 수 있었습니다.
-
-<br>
-
-## 📚 What I learned
-
-- 김승규:
-- 최서호:
-- 홍성준:
-  프로젝트를 통해 검색 엔진을 조사해보고 구현해보았습니다. 늘 사용하지만 잘 몰랐던 검색의 원리를 조사해보면서 보이는 것보다 훨씬 더 복잡한 과정들이 있다는 것을 알게되었습니다. 실제 사용되는 서비스에 비하면 부족한 점이 많겠지만 핵심 원리들을 찾아가며 하나하나 팀원들과 직접 만들어가는 과정에서 많은 것을 배웠다고 생각합니다.
 
 <br>
 
