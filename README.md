@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  Needle in haystack은 IT 키워드 검색시 자체 알고리즘 순위에 따라 영상을 검색해 주고 영상 속 코드 추출 기능도 제공하는 영상 기반의 검색엔진 서비스입니다.
+  Needle in haystack은 IT 키워드 검색시 자체 알고리즘 순위에 따라 영상을 검색해 주고 영상 속 코드 추출 기능도 제공하는 영상 기반의 검색엔진 서비스입니다.d
 </p>
 
 <div align="center">
